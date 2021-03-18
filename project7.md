@@ -24,8 +24,12 @@ Install “LVM2”, then run the “sudo lvmdiskscan” command to check for ava
 ![image](https://user-images.githubusercontent.com/22638955/111556965-0987d480-878c-11eb-9cb4-3ad59eef6c68.png)
 
 
+Use the "pvcreate" utility to mark the disk as a physical volume (PV) to be used by LVM and use "sudo pvs" to check
 
 ![image](https://user-images.githubusercontent.com/22638955/111557736-8a939b80-878d-11eb-8b43-2a56695173a6.png)
+
+![image](https://user-images.githubusercontent.com/22638955/111558235-b1060680-878e-11eb-9ad3-e4d1fe898dcf.png)
+
 
 
 
