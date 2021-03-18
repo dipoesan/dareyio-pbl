@@ -36,6 +36,32 @@ Create a volume group and then check to see if the volume group was created "sud
 ![image](https://user-images.githubusercontent.com/22638955/111558717-9b451100-878f-11eb-80d4-871b3101c562.png)
 
 
+Verify that everything has been created by running "sudo vgdisplay -v"
+![image](https://user-images.githubusercontent.com/22638955/111559471-e01d7780-8790-11eb-97b6-727ee9538e31.png)
+
+
+Setup the NFS server
+
+![image](https://user-images.githubusercontent.com/22638955/111560253-68e8e300-8792-11eb-9156-ff1b8d358863.png)
+
+
+Set up permissions that will allow the Web servers read, write and execute files on the NFS server by running the codes below
+
+![image](https://user-images.githubusercontent.com/22638955/111560543-fe847280-8792-11eb-9808-a1a1ce57dcb4.png)
+
+
+Configure access to the NFS for clients within the same subnet by running "sudo vi /etc/exports" and put in your subnet as shown below
+
+![image](https://user-images.githubusercontent.com/22638955/111560649-312e6b00-8793-11eb-817e-e90926ab4286.png)
+
+
+Since this is a test, we would be opening all ports to the NFS server (not recommended)
+
+
+
+
+
+
 
 
 
