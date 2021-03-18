@@ -16,6 +16,13 @@ Use the "lsblk" command to inspect what block devices are attached to the server
 ![lsblk](https://user-images.githubusercontent.com/22638955/111555005-bf045900-8787-11eb-8e61-3b2fc43f1d62.png)
 
 
+Use the "gdisk" utility to create a partition on the disk
+![image](https://user-images.githubusercontent.com/22638955/111556595-42737980-878b-11eb-9976-7bd190da457f.png)
+
+
+
+
+
 
 
 
