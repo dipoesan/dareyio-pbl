@@ -77,19 +77,21 @@ Install the NFS client
 ![image](https://user-images.githubusercontent.com/22638955/111563824-faf3ea00-8798-11eb-9ba4-090dcbf95995.png)
 
 
+
 Mount /var/www/ and target the NFS server’s export for apps and verify that NFS was mounted successfully by running df -h.
 
 ![image](https://user-images.githubusercontent.com/22638955/111564158-92593d00-8799-11eb-9dfe-b283feb3ff24.png)
 
 
+Edit the /etc/fstab file so that changes will persist on  the Web Server after reboot
+![image](https://user-images.githubusercontent.com/22638955/111564961-e87ab000-879a-11eb-9999-cec83ef81118.png)
 
 
+Install Apache
 
+![image](https://user-images.githubusercontent.com/22638955/111565288-62129e00-879b-11eb-8c2d-6c289c652fe3.png)
 
-
-
-
-
+Repeat all these steps for the other 2 web servers
 
 
 ![home page of tooling website](https://user-images.githubusercontent.com/22638955/111553654-1f45cb80-8785-11eb-8b5e-4bb35fbcb6ef.png)
