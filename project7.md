@@ -8,7 +8,7 @@ Create a 15GB volume in the same AZ as your EC2 Web Server.
 Attach the volume to your EC2 Web Server instance.
 ![image](https://user-images.githubusercontent.com/22638955/111555625-1525cc00-8789-11eb-98ae-a2589362fdb6.png)
 
-Use the "lsblk" command to inspect what block devices are attached to the server (the new block device is xvdf)
+Use the "lsblk" command to inspect what block devices are attached to the server (the new block device is xvdf).
 ![lsblk](https://user-images.githubusercontent.com/22638955/111555005-bf045900-8787-11eb-8e61-3b2fc43f1d62.png)
 
 
