@@ -32,6 +32,12 @@ Use the "pvcreate" utility to mark the disk as a physical volume (PV) to be used
 
 
 
+Create a volume group and then check to see if the volume group was created "sudo vgs"
+![image](https://user-images.githubusercontent.com/22638955/111558717-9b451100-878f-11eb-80d4-871b3101c562.png)
+
+
+
+
 
 
 
