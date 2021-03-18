@@ -1,6 +1,6 @@
 ## PROJECT 7 - DEVOPS TOOLING WEBSITE SOLUTION
 
-Launch 3 EC2 instances that will serve as the 3 Web Servers needed for this project. 
+Launch 4 EC2 instances that will serve as the 3 Web Servers, and 1 NFS server needed for this project.
 
 
 Create a 15GB volume in the same AZ as your EC2 Web Server.
@@ -20,8 +20,15 @@ Use the "gdisk" utility to create a partition on the disk
 ![image](https://user-images.githubusercontent.com/22638955/111556595-42737980-878b-11eb-9976-7bd190da457f.png)
 
 
-
+Install “LVM2”, then run the “sudo lvmdiskscan” command to check for available partitions
 ![image](https://user-images.githubusercontent.com/22638955/111556965-0987d480-878c-11eb-9cb4-3ad59eef6c68.png)
+
+
+
+![image](https://user-images.githubusercontent.com/22638955/111557736-8a939b80-878d-11eb-8b43-2a56695173a6.png)
+
+
+
 
 
 
