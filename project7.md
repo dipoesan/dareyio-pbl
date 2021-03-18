@@ -1,6 +1,7 @@
 ## PROJECT 7 - DEVOPS TOOLING WEBSITE SOLUTION
 
 Launch 3 EC2 instances that will serve as the 3 Web Servers needed for this project. 
+
 Create a 15GB volume in the same AZ as your EC2 Web Server.
 ![image](https://user-images.githubusercontent.com/22638955/111555270-52d62500-8788-11eb-92b7-2a2eddc05c8d.png)
 
