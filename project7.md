@@ -21,6 +21,9 @@ Use the "gdisk" utility to create a partition on the disk
 
 
 
+![image](https://user-images.githubusercontent.com/22638955/111556965-0987d480-878c-11eb-9cb4-3ad59eef6c68.png)
+
+
 
 
 
