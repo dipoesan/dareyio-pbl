@@ -1,6 +1,6 @@
 ## PROJECT 7 - DEVOPS TOOLING WEBSITE SOLUTION
 
-Launch 4 EC2 instances that will serve as the 3 Web Servers, and 1 NFS server needed for this project.
+Launch 4 EC2 instances that will serve as the 3 Web Servers, and 1 NFS server needed for this project (Use RHEL for the 4 servers).
 
 
 Create a 15GB volume in the same AZ as your EC2 Web Server.
@@ -58,9 +58,28 @@ Configure access to the NFS for clients within the same subnet by running "sudo 
 Since this is a test, we would be opening all ports to the NFS server (not recommended)
 
 
+Create a new Ubuntu instance which would be used for our DB server (follow all steps outlined for creating an instance)
+
+Create a database and name it tooling
+
+![image](https://user-images.githubusercontent.com/22638955/111562709-f595a000-8796-11eb-8f90-235c46807d95.png)
 
 
+Create a database user and name it "webaccess"
 
+![image](https://user-images.githubusercontent.com/22638955/111563042-82d8f480-8797-11eb-88a5-0cd4f8bcb283.png)
+
+Grant permission to "webaccess" user on "tooling" database to do anything only from the webservers "subnet cidr"
+
+
+Install the NFS client
+
+![image](https://user-images.githubusercontent.com/22638955/111563824-faf3ea00-8798-11eb-9ba4-090dcbf95995.png)
+
+
+Mount /var/www/ and target the NFS server’s export for apps and verify that NFS was mounted successfully by running df -h.
+
+![image](https://user-images.githubusercontent.com/22638955/111564158-92593d00-8799-11eb-9dfe-b283feb3ff24.png)
 
 
 
