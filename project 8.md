@@ -61,3 +61,29 @@ sudo systemctl restart apache2
 ![image](https://user-images.githubusercontent.com/22638955/114967734-e6287600-9e6c-11eb-85ff-0e00ef38cb2f.png)
 ![image](https://user-images.githubusercontent.com/22638955/114968007-6353eb00-9e6d-11eb-9507-8e5965dca8b2.png)
 
+<b>Configure the Load Balancer</b>
+
+Edit the 000-default.conf file using - <b>sudo vi /etc/apache2/sites-available/000-default.conf</b>
+
+Add this configuration into the section <VirtualHost *:80>  </VirtualHost>
+
+<Proxy "balancer://mycluster">
+               BalancerMember http://<WebServer1-Private-IP-Address>:80 loadfactor=5 timeout=1
+               BalancerMember http://<WebServer2-Private-IP-Address>:80 loadfactor=5 timeout=1
+               ProxySet lbmethod=bytraffic
+               # ProxySet lbmethod=byrequests
+        </Proxy>
+
+        ProxyPreserveHost On
+        ProxyPass / balancer://mycluster/
+        ProxyPassReverse / balancer://mycluster/
+        
+![image](https://user-images.githubusercontent.com/22638955/114968899-2e489800-9e6f-11eb-90c4-a94be71f19a2.png)
+
+Then restart the apache server
+
+<b>sudo systemctl restart apache2</b>
+
+Verify that the configuration works - we try to accessing the load balancers public IP address or Public DNS name from our browser
+![image](https://user-images.githubusercontent.com/22638955/114969701-db6fe000-9e70-11eb-91cd-6f0816fd8bef.png)
+![image](https://user-images.githubusercontent.com/22638955/114969759-f3476400-9e70-11eb-894b-b1c42e139d0e.png)
