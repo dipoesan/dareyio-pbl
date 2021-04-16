@@ -1,5 +1,7 @@
 <h1>Load Balancer Solution With Apache</h1>
 
+This is a continuation from project 7, as we are building upon the infrastructure we had already setup in that project.
+
 Check to see that Apache is running on both web servers
 ![image](https://user-images.githubusercontent.com/22638955/114963983-ca6da180-9e65-11eb-8b11-5007b0d860ae.png)
 ![image](https://user-images.githubusercontent.com/22638955/114964110-fc7f0380-9e65-11eb-88f6-111aca4b087a.png)
@@ -120,5 +122,7 @@ Now you can update your LB config file with those names instead of IP addresses.
 ![image](https://user-images.githubusercontent.com/22638955/114972245-11fc2980-9e76-11eb-8ac6-97afd6fcb8f8.png)
 
 You can try to curl your Web Servers from LB locally curl http://web1 or curl http://web2 - it shall work.
+
+![image](https://user-images.githubusercontent.com/22638955/114973068-94391d80-9e77-11eb-9702-3e9e25bd77a6.png)
 
 Remember, this is only internal configuration and it is also local to your LB server, these names will neither be ‘resolvable’ from other servers internally nor from the Internet.
