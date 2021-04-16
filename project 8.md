@@ -91,6 +91,7 @@ Verify that the configuration works - we try accessing the load balancers public
 Open two ssh/Putty consoles for both Web Servers and run following command:
 
 <b>sudo tail -f /var/log/httpd/access_log</b>
+
 Try to refresh your browser page http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php several times and make sure that both servers receive HTTP GET requests from your LB - new records must appear in each server’s log file. The number of requests to each server will be approximately the same since we set loadfactor to the same value for both servers - it means that traffic will be disctributed evenly between them.
 
 If you have configured everything correctly - your users will not even notice that their requests are served by more than one server.
@@ -98,3 +99,17 @@ If you have configured everything correctly - your users will not even notice th
 ![image](https://user-images.githubusercontent.com/22638955/114971455-3eaf4180-9e74-11eb-8598-ffdab24ef91c.png)
 ![image](https://user-images.githubusercontent.com/22638955/114971506-5e466a00-9e74-11eb-855d-d4ff4a73658c.png)
 
+<h2>Configure Local DNS Names Resolution</h2>
+Sometimes it is tedious to remember and switch between IP addresses, especially if you have a lot of servers under your management. What we can do, is to configure local domain name resolution. The easiest way is to use /etc/hosts file, although this approach is not very scalable, but it is very easy to configure and shows the concept well. So let us configure IP address to domain name mapping for our LB.
+
+Open this file on your LB server
+
+sudo vi /etc/hosts
+Add 2 records into this file with Local IP address and arbitrary name for both of your Web Servers
+
+WebServer1-Private-IP-Address Web1
+
+WebServer2-Private-IP-Address Web2
+
+![image](https://user-images.githubusercontent.com/22638955/114972046-969a7800-9e75-11eb-8e4d-529f0fdb5f0f.png)
+![image](https://user-images.githubusercontent.com/22638955/114972245-11fc2980-9e76-11eb-8ac6-97afd6fcb8f8.png)
