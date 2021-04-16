@@ -112,4 +112,13 @@ WebServer1-Private-IP-Address Web1
 WebServer2-Private-IP-Address Web2
 
 ![image](https://user-images.githubusercontent.com/22638955/114972046-969a7800-9e75-11eb-8e4d-529f0fdb5f0f.png)
+
+Now you can update your LB config file with those names instead of IP addresses.
+
+<b>sudo vi /etc/apache2/sites-available/000-default.conf</b>
+
 ![image](https://user-images.githubusercontent.com/22638955/114972245-11fc2980-9e76-11eb-8ac6-97afd6fcb8f8.png)
+
+You can try to curl your Web Servers from LB locally curl http://web1 or curl http://web2 - it shall work.
+
+Remember, this is only internal configuration and it is also local to your LB server, these names will neither be ‘resolvable’ from other servers internally nor from the Internet.
