@@ -1,6 +1,6 @@
 <h1>Tooling Website deployment automation with Continuous Integration. Introduction to Jenkins</h1>
 
-We are going to continue from where we stopped in project 8 by building on some of the infrastructure we already creatd.
+We are going to continue from where we stopped in project 8 by building on some of the infrastructure we already created.
 
 Spin up an Ubuntu instance for the Jenkins server
 
