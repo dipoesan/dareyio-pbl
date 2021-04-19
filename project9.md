@@ -101,5 +101,4 @@ Go ahead and make some change in any file in your GitHub repository (e.g. README
 
 We can see that a new build has been launched automatically (by webhook) and you can see its results - artifacts, saved on Jenkins server.
 
-........
-,,,,,
+![image](https://user-images.githubusercontent.com/22638955/115174793-cdfd6480-a0c1-11eb-94d0-366f813e7320.png)
