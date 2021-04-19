@@ -71,4 +71,34 @@ In configuration of your Jenkins freestyle project choose Git repository, provid
 
 ![image](https://user-images.githubusercontent.com/22638955/115171745-a7d4c600-a0bb-11eb-918d-8ec98ddf2d53.png)
 
+Click on "Save" at the bottom of the Jenkins page
+
+Save the configuration and let us try to run the build. For now we can only do it manually. Click “Build Now” button, if you have configured everything correctly, the build will be successfull and you will see it under
+
+![image](https://user-images.githubusercontent.com/22638955/115172153-8c1def80-a0bc-11eb-8a12-a0782b04cb4b.png)
+
+We can open the build and check in “Console Output” if it has run successfully. As shown below, the build ran successfully
+
+![image](https://user-images.githubusercontent.com/22638955/115172233-bb346100-a0bc-11eb-8c68-2c5b43a9606e.png)
+
+But this build does not produce anything and it runs only when we trigger it manually
+
+We would make some adjustments to fix this.
+
+Click “Configure” your job/project and add these two configurations
+
+![image](https://user-images.githubusercontent.com/22638955/115172706-b8863b80-a0bd-11eb-8b51-54b2aed79674.png)
+
+Configure triggering the job from GitHub webhook:
+
+![image](https://user-images.githubusercontent.com/22638955/115173076-698cd600-a0be-11eb-9ea8-eb4a59b65158.png)
+
+Configure “Post-build Actions” to archive all the files - files resulted from a build are called “artifacts”.
+
+![image](https://user-images.githubusercontent.com/22638955/115173242-c1c3d800-a0be-11eb-90a2-c243926f8ca6.png)
+
+Go ahead and make some change in any file in your GitHub repository (e.g. README.MD file) and push the changes to the master branch.
+
+We can see that a new build has been launched automatically (by webhook) and you can see its results - artifacts, saved on Jenkins server.
+
 
