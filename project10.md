@@ -50,3 +50,13 @@ Restart Nginx and make sure the service is up and running using the commands bel
 
 <b>sudo systemctl status nginx</b>
 
+## Register a new domain name and configure secured connection using SSL/TLS certificates
+
+Register a new domain name with any registrar of your choice in any domain zone (e.g. .com, .net, .org, .edu, .info, .xyz or any other)
+
+
+
+Assign an Elastic IP to your Nginx LB server and associate your domain name with this Elastic IP. When you want to associate your domain name - it is better to have a static IP address that does not change after reboot. 
+
+![image](https://user-images.githubusercontent.com/22638955/115253499-57de1980-a124-11eb-96f0-fe2054d71280.png)
+
