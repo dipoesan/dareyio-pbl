@@ -1,6 +1,6 @@
 <h1>Tooling Website deployment automation with Continuous Integration. Introduction to Jenkins</h1>
 
-
+We are going to continue from where we stopped in project 8 by building on some of the infrastructure we already creatd.
 
 Spin up an Ubuntu instance for the Jenkins server
 
@@ -150,5 +150,11 @@ Configure it to send all files probuced by the build into our previouslys define
 
 ![image](https://user-images.githubusercontent.com/22638955/115178087-6dbdf100-a0c8-11eb-85e8-ef8b78e21a52.png)
 
+![image](https://user-images.githubusercontent.com/22638955/115178906-1e78c000-a0ca-11eb-99ce-3db713061844.png)
 
-......
+Had to change ownership of the /mnt/apps directory as I could not find the readme.md file when i ran the <b>cat /mnt/apps/README.md
+</b> command.
+
+![image](https://user-images.githubusercontent.com/22638955/115178953-32242680-a0ca-11eb-8dcb-8dca413b26e3.png)
+
+
