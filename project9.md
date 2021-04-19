@@ -57,4 +57,18 @@ The installation is completed!
 
 ![image](https://user-images.githubusercontent.com/22638955/115169064-e5822080-a0b4-11eb-93b7-39d775898e7b.png)
 
+<h2>Configure Jenkins to retrieve source codes from GitHub using Webhooks</h2>
+
+Enable webhooks in your GitHub repository settings
+
+![image](https://user-images.githubusercontent.com/22638955/115170595-e87f1000-a0b8-11eb-9cb7-e5e9584ada24.png)
+
+Go to Jenkins web console, click “New Item” and create a “Freestyle project”
+
+To connect your GitHub repository, you will need to provide its URL, you can copy from the repository itself
+
+In configuration of your Jenkins freestyle project choose Git repository, provide there the link to your Tooling GitHub repository and credentials (user/password) so Jenkins could access files in the repository.
+
+![image](https://user-images.githubusercontent.com/22638955/115171745-a7d4c600-a0bb-11eb-918d-8ec98ddf2d53.png)
+
 
