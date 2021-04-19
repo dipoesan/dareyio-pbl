@@ -2,7 +2,7 @@
 
 
 
-Spun up an Ubuntu instance for the Jenkins server
+Spin up an Ubuntu instance for the Jenkins server
 
 ![image](https://user-images.githubusercontent.com/22638955/115167868-e44ef480-a0b0-11eb-8aa2-94843da9c1b9.png)
 
@@ -35,3 +35,4 @@ Make sure Jenkins is up and running
 
 By default Jenkins server uses TCP port 8080 - open it by creating a new Inbound Rule in your EC2 Security Group
 
+![image](https://user-images.githubusercontent.com/22638955/115168541-3a249c00-a0b3-11eb-85d2-582d1ad36101.png)
