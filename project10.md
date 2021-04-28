@@ -107,7 +107,7 @@ You can test renewal command in dry-run mode
 
 ![image](https://user-images.githubusercontent.com/22638955/116341840-8b323f80-a7d9-11eb-9cf7-6c1dd68eb9c5.png)
 
-Best pracice is to have a scheduled job that would run a renew command periodically. We would configure a cronjob to run the command twice a day. To do so, lets edit the crontab file with the following command:
+Best practice is to have a scheduled job that would run a renew command periodically. We would configure a cronjob to run the command twice a day. To do so, lets edit the crontab file with the following command:
 
 <b>crontab -e</b>
 
