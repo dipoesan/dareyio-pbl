@@ -115,3 +115,7 @@ and add the following line -
 
 <b>* */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1</b>
 
+![image](https://user-images.githubusercontent.com/22638955/116342582-c84b0180-a7da-11eb-9328-9aad5bfe1513.png)
+
+You can always change the interval of this cronjob if twice a day is too often by adjusting schedule expression.
+
