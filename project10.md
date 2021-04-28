@@ -54,9 +54,38 @@ Restart Nginx and make sure the service is up and running using the commands bel
 
 Register a new domain name with any registrar of your choice in any domain zone (e.g. .com, .net, .org, .edu, .info, .xyz or any other)
 
-
-
 Assign an Elastic IP to your Nginx LB server and associate your domain name with this Elastic IP. When you want to associate your domain name - it is better to have a static IP address that does not change after reboot. 
 
 ![image](https://user-images.githubusercontent.com/22638955/115253499-57de1980-a124-11eb-96f0-fe2054d71280.png)
+
+Associated the elastic IP with the domain i bought by changing the DNS settings of my domain as shown below -
+
+![image](https://user-images.githubusercontent.com/22638955/116260876-027eb980-a76f-11eb-931b-0fa2d717010d.png)
+
+Check that your Web Servers can be reached from your browser using new domain name using HTTP protocol - http://<your-domain-name.com>
+
+![image](https://user-images.githubusercontent.com/22638955/116340192-a64f8000-a7d6-11eb-885b-1926585709c6.png)
+
+Configure Nginx to recognize your new domain name
+Update your "nginx.conf" with "server_name www.<your-domain-name.com>" instead of "server_name www.domain.com"
+
+![image](https://user-images.githubusercontent.com/22638955/116340377-fcbcbe80-a7d6-11eb-83c4-e27fb1384c69.png)
+
+**When I was setting up my domain, I forgot to add the "@" symbol as my hostname, so I was having issues accessing my domain.**
+
+Install certbot and request for an SSL/TLS certificate, also make sure snapd service is active and running
+
+<b> systemctl status snapd</b>
+
+![image](https://user-images.githubusercontent.com/22638955/116340677-75bc1600-a7d7-11eb-9425-d82c2eac23cc.png)
+
+Install certbot
+
+<b> sudo snap install --classic certbot</b>
+
+![image](https://user-images.githubusercontent.com/22638955/116340866-c764a080-a7d7-11eb-8c95-27d64866d947.png)
+
+Request your certificate (just follow the certbot instructions - you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so make sure you have updated it
+
+
 
