@@ -87,5 +87,31 @@ Install certbot
 
 Request your certificate (just follow the certbot instructions - you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so make sure you have updated it
 
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
+sudo certbot --nginx
+
+![image](https://user-images.githubusercontent.com/22638955/116341257-7acd9500-a7d8-11eb-8787-6bca2629062a.png)
+
+Test secured access to your Web Solution by trying to reach
+
+You shall be able to access your website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string. Click on the padlock icon and you can see the details of the certificate issued for your website.
+
+![image](https://user-images.githubusercontent.com/22638955/116341436-d4ce5a80-a7d8-11eb-9c8d-44003485b199.png)
+
+Set up periodical renewal of your SSL/TLS certificate. By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
+
+You can test renewal command in dry-run mode
+
+<b>sudo certbot renew --dry-run</b>
+
+![image](https://user-images.githubusercontent.com/22638955/116341840-8b323f80-a7d9-11eb-9cf7-6c1dd68eb9c5.png)
+
+Best pracice is to have a scheduled job that would run a renew command periodically. We would configure a cronjob to run the command twice a day. To do so, lets edit the crontab file with the following command:
+
+<b>crontab -e</b>
+
+and add the following line - 
+
+<b>* */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1</b>
 
