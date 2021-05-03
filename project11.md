@@ -36,4 +36,20 @@ Check your Ansible version by running `ansible --version`
 
 ![image](https://user-images.githubusercontent.com/22638955/116823439-76103480-ab7c-11eb-91cb-ac2750694012.png)
 
+Configure Jenkins build job to save your repository content every time you change it 
+
+* Create a new Freestyle project ansible in Jenkins and point it to your ‘ansible-config-mgt’ repository
+
+![image](https://user-images.githubusercontent.com/22638955/116833246-16cc1780-abb0-11eb-8723-c22a95ec23fc.png)
+
+* Configure Webhook in GitHub and set webhook to trigger ansible build
+
+![image](https://user-images.githubusercontent.com/22638955/116833451-1e3ff080-abb1-11eb-92a1-4fa605edf55f.png)
+
+Go back to Jenkins and configure triggering a build job from GitHub webhook, and Configure “Post-build Actions” to archive all the files.
+
+![image](https://user-images.githubusercontent.com/22638955/116833673-74616380-abb2-11eb-91ea-55e7271e98c7.png)
+
+
+
 
