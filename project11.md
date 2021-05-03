@@ -50,6 +50,12 @@ Go back to Jenkins and configure triggering a build job from GitHub webhook, and
 
 ![image](https://user-images.githubusercontent.com/22638955/116833673-74616380-abb2-11eb-91ea-55e7271e98c7.png)
 
+We are going to test our setup by making some change in the README.MD file in our main branch, and we would also make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
 
+`/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/`
 
+![image](https://user-images.githubusercontent.com/22638955/116835271-a924e900-abb9-11eb-982a-be2b2fcbde78.png)
 
+![image](https://user-images.githubusercontent.com/22638955/116835315-d40f3d00-abb9-11eb-9305-afadbab3cac5.png)
+
+From the above images, we can see that we have had 6 automatic builds in Jenkins, and they have also reflected in the folder as shown in the command below `/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/`
