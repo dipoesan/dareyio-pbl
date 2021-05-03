@@ -59,3 +59,6 @@ We are going to test our setup by making some change in the README.MD file in ou
 ![image](https://user-images.githubusercontent.com/22638955/116835315-d40f3d00-abb9-11eb-9305-afadbab3cac5.png)
 
 From the above images, we can see that we have had 6 automatic builds in Jenkins, and they have also reflected in the folder as shown in the command below `/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/`
+
+### Prepare the development environment using Visual Studio Code
+
