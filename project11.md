@@ -62,3 +62,14 @@ From the above images, we can see that we have had 6 automatic builds in Jenkins
 
 ### Prepare the development environment using Visual Studio Code
 
+I was stuck on connecting my VSCode IDE to my Jenkins-Ansible EC2 instance as I specified a private key (ppk) instead of a `.pem` key.
+
+Follow this [link](https://medium.com/@christyjacob4/using-vscode-remotely-on-an-ec2-instance-7822c4032cff) to setup your VSCode to connect to your instance.
+
+![image](https://user-images.githubusercontent.com/22638955/117086440-69d6d380-ad44-11eb-8bcb-9246dcd8012a.png)
+
+### Begin Ansible Development
+
+
+
+
