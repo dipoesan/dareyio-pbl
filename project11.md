@@ -66,9 +66,23 @@ I was stuck on connecting my VSCode IDE to my Jenkins-Ansible EC2 instance as I 
 
 Follow this [link](https://medium.com/@christyjacob4/using-vscode-remotely-on-an-ec2-instance-7822c4032cff) to setup your VSCode to connect to your instance.
 
+### Begin Ansible Development
+
+In the `ansible-config-mgt` GitHub repository I created previously, we would be creating a new branch that will be used for development of a new feature.
+
+We would checkout a newly created feature branch to our local machine and start building our code and directory structure
+
+We first cloned the repository, then created a new feature using `git checkout -b feature name`
+
 ![image](https://user-images.githubusercontent.com/22638955/117086440-69d6d380-ad44-11eb-8bcb-9246dcd8012a.png)
 
-### Begin Ansible Development
+I created a directory and named it `playbooks` - it will be used to store all our playbook files.
+
+I created a directory and named it `inventory` - it will be used to keep our hosts organised.
+
+Within the playbooks folder, I created our first playbook, and named it `common.yml`
+
+Within the inventory folder, I created an inventory file (.yml) for each environment (Development, Staging Testing and Production) dev, staging, uat, and prod respectively.
 
 
 
