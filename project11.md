@@ -95,7 +95,7 @@ Note: Ansible uses TCP port 22 by default, which means it needs to ssh into targ
 I made use of mobaxterm to copy the `.pem` key from my PC to the linux instance.
 
 We would update our inventory/dev.yml file with this snippet of code:
-
+```
 [nfs]
 <NFS-Server-Private-IP-Address> ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=<path-to-.pem-private-key>
 
@@ -108,11 +108,99 @@ We would update our inventory/dev.yml file with this snippet of code:
 
 [lb]
 <Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+```
 
 Below is what the `dev.yml` file looks like after inserting information into it
 
 ![image](https://user-images.githubusercontent.com/22638955/117090202-99d7a400-ad4f-11eb-8462-4afd40e987ac.png)
 
 ### Create a Common Playbook
+
+This is where we start giving Ansible the instructions on what is needed to be performed on all servers listed in inventory/dev.
+
+In common.yml playbook we will write configuration for repeatable, re-usable, and multi-machine tasks that is common to systems within the infrastructure.
+
+We would update our playbooks/common.yml file with following code:
+
+```
+---
+- name: update web, nfs and db servers
+  hosts: webservers, nfs, db
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+  tasks:
+  - name: ensure wireshark is at the latest version
+    yum:
+      name: wireshark
+      state: latest
+
+- name: update LB server
+  hosts: lb
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  tasks:
+  - name: ensure wireshark is at the latest version
+    apt:
+      name: wireshark
+      state: latest
+ ```
+
+This playbook is divided into two parts, each of them is intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on your RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
+
+### Update GIT with the latest code
+
+Now all of our directories and files live on our machines and we need to push changes that we made locally to GitHub.
+
+In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes - it is also called “Four eyes principle”.
+
+Now you have a separate branch, you will need to know how to raise a Pull Request (PR), get your branch peer reviewed and merged to the master branch.
+
+Commit code into GitHub:
+
+use git commands to add, commit and push our branch to GitHub.
+
+```
+git status
+
+git add <selected files>
+
+git commit -m "commit message"
+
+git push --set-upstream origin feature name
+```
+![image](https://user-images.githubusercontent.com/22638955/117091740-2ab07e80-ad54-11eb-9fb7-2fd5d322aede.png)
+
+In the above image, you can see that I made a mistake of not adding the `commit` command when i wanted to commit, hence my changes did not reflect on github.
+
+Create a Pull request (PR)
+
+![image](https://user-images.githubusercontent.com/22638955/117092271-b545ad80-ad55-11eb-8e99-634d9b8ffd2f.png)
+
+Merge the code to the master branch.
+
+![image](https://user-images.githubusercontent.com/22638955/117092401-166d8100-ad56-11eb-9763-b792a7229f4c.png)
+
+ Checkout from the feature branch into the master and pull down the latest changes.
+
+```
+git checkout master
+git pull
+```
+Jenkins should pick up the changes we have made so far.
+
+![image](https://user-images.githubusercontent.com/22638955/117093033-b4158000-ad57-11eb-8c77-ccf37c767c67.png)
+
+### Run first Ansible test
+
+![image](https://user-images.githubusercontent.com/22638955/117094797-a6162e00-ad5c-11eb-897e-619c3b619ceb.png)
+
+Check to see if wireshark has been installed
+
+![image](https://user-images.githubusercontent.com/22638955/117095444-50db1c00-ad5e-11eb-894a-72b2f1c62e6d.png)
+
+
+
 
 
