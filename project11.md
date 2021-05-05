@@ -84,6 +84,35 @@ Within the playbooks folder, I created our first playbook, and named it `common.
 
 Within the inventory folder, I created an inventory file (.yml) for each environment (Development, Staging Testing and Production) dev, staging, uat, and prod respectively.
 
+![image](https://user-images.githubusercontent.com/22638955/117087667-14042a80-ad48-11eb-9b86-d81bbf7c0bb0.png)
 
+### Set up an Ansible Inventory
+
+An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
+
+Note: Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from the Jenkins-Ansible host - for this we need to copy our private (.pem) key and provide a path to it so Ansible can use it to connect. Lets not forget to change permissions to our private key chmod 400 key.pem, otherwise EC2 will not accept the key. Also notice, that our Load Balancer user is ubuntu and user for RHEL-based servers is ec2-user.
+
+I made use of mobaxterm to copy the `.pem` key from my PC to the linux instance.
+
+We would update our inventory/dev.yml file with this snippet of code:
+
+[nfs]
+<NFS-Server-Private-IP-Address> ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+
+[webservers]
+<Web-Server1-Private-IP-Address> ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+<Web-Server2-Private-IP-Address> ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+
+[db]
+<Database-Private-IP-Address> ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+
+[lb]
+<Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+
+Below is what the `dev.yml` file looks like after inserting information into it
+
+![image](https://user-images.githubusercontent.com/22638955/117090202-99d7a400-ad4f-11eb-8462-4afd40e987ac.png)
+
+### Create a Common Playbook
 
 
