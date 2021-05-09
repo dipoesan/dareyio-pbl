@@ -107,3 +107,54 @@ Our folder structure should look like below
     └── site.yml
 ```
 
+Run the `ansible-playbook` command against the dev environment
+
+Since we need to apply some tasks to our `dev` servers and `wireshark` is already installed - we can go ahead and create another playbook under `static-assignments` and name it `common-del.yml`. In this playbook, we would configure the deletion of the `wireshark` utility.
+
+```
+---
+- name: update web, nfs and db servers
+  hosts: webservers, nfs, db
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+  tasks:
+  - name: delete wireshark
+    yum:
+      name: wireshark
+      state: removed
+
+- name: update LB server
+  hosts: lb
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  tasks:
+  - name: delete wireshark
+    apt:
+      name: wireshark-qt
+      state: absent
+      autoremove: yes
+      purge: yes
+      autoclean: yes
+```
+
+![image](https://user-images.githubusercontent.com/22638955/117589357-dd9c2600-b120-11eb-9e32-60680ef99286.png)
+
+update `site.yml` with `- import_playbook: ../static-assignments/common-del.yml` instead of `common.yml` and run it against `dev` servers:
+
+![image](https://user-images.githubusercontent.com/22638955/117589470-9e220980-b121-11eb-804e-d26e0f033c89.png)
+
+```
+sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/dev.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yml
+```
+
+![image](https://user-images.githubusercontent.com/22638955/117589622-90b94f00-b122-11eb-8c67-7f8b6d028366.png)
+
+Make sure that `wireshark` is deleted on all the servers by running `wireshark --version`
+
+## Step 3 - Configure UAT Webservers with a role ‘Webserver’
+
+We would be launching 2 new webs servers to use as `UAT` environments.
+
+
