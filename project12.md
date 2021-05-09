@@ -157,4 +157,128 @@ Make sure that `wireshark` is deleted on all the servers by running `wireshark -
 
 We would be launching 2 new webs servers to use as `UAT` environments.
 
+Launch 2 fresh EC2 instances using RHEL 8 image, we will use them as our uat servers, so we would give them names accordingly - `Web1-UAT` and `Web2-UAT`.
+
+![image](https://user-images.githubusercontent.com/22638955/117590012-73d24b00-b125-11eb-837c-35b5f04faa6b.png)
+
+To create a role, we must create a directory called roles/, relative to the playbook file or in /etc/ansible/ directory.
+
+There are two ways we can create this folder structure:
+
+We can use an Ansible utility called `ansible-galaxy` inside `ansible-config-mgt/roles` directory (you need to create roles directory upfront)
+
+```
+mkdir roles
+cd roles
+ansible-galaxy init webserver
+```
+
+![image](https://user-images.githubusercontent.com/22638955/117590395-2951ce00-b127-11eb-9ebe-b90be541453b.png)
+
+Or we can create the directory/files structure manually
+
+Note: We can choose either way, but since we store all our codes in GitHub, it is recommended to create folders and files there rather than locally on the `Jenkins-Ansible` server.
+
+The entire folder structure should look like below, but if you create it manually - you can skip creating `tests`, `files`, and `vars` or remove them if you used `ansible-galaxy`
+
+```
+└── webserver
+    ├── README.md
+    ├── defaults
+    │   └── main.yml
+    ├── files
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── tasks
+    │   └── main.yml
+    ├── templates
+    ├── tests
+    │   ├── inventory
+    │   └── test.yml
+    └── vars
+        └── main.yml
+```
+
+After removing unnecessary directories and files, the roles structure should look like this
+
+```
+└── webserver
+    ├── README.md
+    ├── defaults
+    │   └── main.yml
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── tasks
+    │   └── main.yml
+    └── templates
+```
+
+We would be updating our inventory `ansible-config-mgt/inventory/uat.yml` file with IP addresses of our 2 UAT Web servers
+
+```
+[uat-webservers]
+<Web1-UAT-Server-Private-IP-Address> ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+<Web2-UAT-Server-Private-IP-Address> ansible_ssh_user='ec2-user' ansible_ssh_private_key_file=<path-to-.pem-private-key>
+```
+
+In `/etc/ansible/ansible.cfg` file uncomment `roles_path` string and provide a full path to your roles directory `roles_path = /home/ubuntu/ansible-config-mgt/roles`, so Ansible could know where to find configured roles.
+
+![image](https://user-images.githubusercontent.com/22638955/117590767-d0833500-b128-11eb-8669-0a7e372feb17.png)
+
+Go into `tasks` (`ansible-config-mgt/roles/webserver/tasks`) directory, and within the `main.yml` file, start writing configuration tasks to do the following:
+
+* Install and configure Apache (httpd service)
+* Clone Tooling website from GitHub https://github.com/<your-name>/tooling.git.
+* Ensure the tooling website code is deployed to /var/www/html on each of 2 UAT Web servers.
+* Make sure httpd service is started
+
+```
+---
+- name: install apache
+  become: true
+  ansible.builtin.yum:
+    name: "httpd"
+    state: present
+
+- name: install git
+  become: true
+  ansible.builtin.yum:
+    name: "git"
+    state: present
+
+- name: clone a repo
+  become: true
+  ansible.builtin.git:
+    repo: https://github.com/<your-name>/tooling.git
+    dest: /var/www/html
+    force: yes
+
+- name: copy html content to one level up
+  become: true
+  command: cp -r /var/www/html/html/ /var/www/
+
+- name: Start service httpd, if not started
+  become: true
+  ansible.builtin.service:
+    name: httpd
+    state: started
+
+- name: recursively remove /var/www/html/html/ directory
+  become: true
+  ansible.builtin.file:
+    path: /var/www/html/html
+    state: absent
+```
+
+## Step 4 - Reference ‘Webserver’ role
+
+Within the `static-assignments` folder, we would create a new assignment for uat-webservers `uat-webservers.yml`. This is where we will reference the role.
+
+
+
+
 
