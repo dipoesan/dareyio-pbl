@@ -66,7 +66,44 @@ git pull
 git checkout -b refactor
 ```
 
+Within playbooks folder, create a new file and name it `site.yml` - This file will now be considered as an entry point into the entire infrastructure configuration. 
+Other playbooks will be included here as a reference. In other words, `site.yml` will become a parent to all other playbooks that will be developed, including `common.yml` that we created previously.
 
+Create a new folder in root of the repository and name it `static-assignments`. The static-assignments folder is where all other children playbooks will be stored. This is merely for easy organization of your work. It is not an Ansible specific concept, therefore you can choose how you want to organize your work. 
 
+![image](https://user-images.githubusercontent.com/22638955/117587982-9447d880-b118-11eb-9dbe-3f325ace04e5.png)
 
+Move the `common.yml` file into the newly created `static-assignments`folder.
+
+```
+sudo mv playbooks/common.yml static-assignments/
+```
+
+![image](https://user-images.githubusercontent.com/22638955/117588189-d02f6d80-b119-11eb-8661-9b35571a93c4.png)
+
+Inside the `site.yml`file, import the `common.yml` playbook using the code below -
+
+```
+---
+- hosts: all
+- import_playbook: ../static-assignments/common.yml
+```
+
+![image](https://user-images.githubusercontent.com/22638955/117588275-4633d480-b11a-11eb-97e1-1b7c4346cb6c.png)
+
+The code above uses the built in import_playbook Ansible module.
+
+Our folder structure should look like below 
+
+```
+├── static-assignments
+│   └── common.yml
+├── inventory
+    └── dev
+    └── staging
+    └── uat
+    └── prod
+└── playbooks
+    └── site.yml
+```
 
