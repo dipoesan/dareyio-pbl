@@ -278,6 +278,46 @@ Go into `tasks` (`ansible-config-mgt/roles/webserver/tasks`) directory, and with
 
 Within the `static-assignments` folder, we would create a new assignment for uat-webservers `uat-webservers.yml`. This is where we will reference the role.
 
+Remember that the entry point to our ansible configuration is the `site.yml` file. Therefore, we need to refer our `uat-webservers.yml` role inside `site.yml`.
+
+So, we should have this in `site.yml`-
+
+```
+---
+- hosts: all
+- import_playbook: ../static-assignments/common.yml
+
+- hosts: uat-webservers
+- import_playbook: ../static-assignments/uat-webservers.yml
+```
+
+![image](https://user-images.githubusercontent.com/22638955/117591388-27d6d480-b12c-11eb-888e-27dfdc440b25.png)
+
+## Step 5 - Commit & Test
+
+We would be committing our changes, creating a Pull Request and merging them to the `main` branch, making sure webhook triggered two consequent Jenkins jobs, they ran successfully and copied all the files to our `Jenkins-Ansible` server into `/home/ubuntu/ansible-config-mgt/` directory.
+
+```
+git add .
+git commit -m 'commit message'
+git push --set-upstream origin refactor
+```
+
+We would now run the playbook against our uat inventory:
+
+```
+sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yml
+```
+
+![image](https://user-images.githubusercontent.com/22638955/117596224-cb2ee600-b13a-11eb-9088-843005d41469.png)
+
+![image](https://user-images.githubusercontent.com/22638955/117596246-d97d0200-b13a-11eb-87e6-84e4971a68e6.png)
+
+We should be able to see both of our UAT Web servers configured and we can try to reach them from our browser
+
+Our Ansible architecture should look like the below now - 
+
+![image](https://user-images.githubusercontent.com/22638955/117596417-4395a700-b13b-11eb-9a71-5d83796c8335.png)
 
 
 
