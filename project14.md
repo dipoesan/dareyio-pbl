@@ -73,3 +73,24 @@ We are going to add two more roles to ansible -
 * [SonarQube](https://youtu.be/vE39Fg8pvZg)
 
 * [Artifactory](https://youtu.be/upJS4R6SbgM)
+
+```
+cd roles
+ansible-galaxy init sonarqube
+ansible-galaxy init artifactory
+```
+
+![image](https://user-images.githubusercontent.com/22638955/118743048-79c4dc00-b849-11eb-8f20-aa15739e7d4b.png)
+
+## Configuring Ansible For Jenkins Deployment
+
+In previous projects, we have been launching Ansible commands manually from a CLI. Now, with Jenkins, we will start running Ansible from the Jenkins UI.
+
+* Navigate to your Jenkins URL
+
+* Install and open Blue Ocean Jenkins plugin
+
+* Create a new pipeline
+
+![image](https://user-images.githubusercontent.com/22638955/118744279-f3f66000-b84b-11eb-9507-9b0d3e6729cf.png)
+
