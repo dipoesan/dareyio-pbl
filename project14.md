@@ -109,3 +109,7 @@ Connect Jenkins with Github by logging onto Github and generating an access toke
 Then generate the token. Copy the access token, paste it on the blue ocean page and connect.
 
 ![image](https://user-images.githubusercontent.com/22638955/118746588-6b2df300-b850-11eb-8672-a07195aa74da.png)
+
+![image](https://user-images.githubusercontent.com/22638955/118747102-4be39580-b851-11eb-9043-97abd309ee5c.png)
+
+Continue tomorrow
