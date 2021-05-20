@@ -110,6 +110,55 @@ Then generate the token. Copy the access token, paste it on the blue ocean page 
 
 ![image](https://user-images.githubusercontent.com/22638955/118746588-6b2df300-b850-11eb-8672-a07195aa74da.png)
 
-![image](https://user-images.githubusercontent.com/22638955/118747102-4be39580-b851-11eb-9043-97abd309ee5c.png)
+Select the name of the organisation that holds your `ansible-config-management` repository.
 
-Continue tomorrow
+Then select the `ansible-config-management` repository, and then create.
+
+Below is our newly created pipeline - 
+
+![image](https://user-images.githubusercontent.com/22638955/118897602-89542b80-b902-11eb-91ff-167de80d4b1c.png)
+
+Next step is to create a `Jenkins` file by ourselves.
+
+Go into the `ansible-config-mgt` directory and create another directory called `deploy`, and then start a new file called `Jenkinsfile` inside the directory.
+
+![image](https://user-images.githubusercontent.com/22638955/118897917-3af35c80-b903-11eb-839d-9c779960194d.png)
+
+Add the code snippet below to start building the `Jenkinsfile` gradually. This pipeline currently has just one stage called `Build` and the only thing we are doing is using the `shell script` module to echo `Building Stage`
+
+```
+pipeline {
+    agent any
+
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+    }
+}
+```
+
+Now we would go back into the Ansible pipeline in Jenkins and select configure -
+
+![image](https://user-images.githubusercontent.com/22638955/118898110-b35a1d80-b903-11eb-97da-ed1ba90929bd.png)
+
+Scroll down to `Build Configuration` section and specify the location of the Jenkinsfile (`deploy/Jenkinsfile`).
+
+Save the above.
+
+Go to the Blue Ocean dashboard, select the `ansible-config-mgt` project
+
+Hover over any of the branches, and oyu should see a play button. Click on it, and it should build it
+
+![image](https://user-images.githubusercontent.com/22638955/118900302-86f4d000-b908-11eb-8f79-33ae396fa72f.png)
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/22638955/118898258-1350c400-b904-11eb-86b6-eb395efce753.png)
