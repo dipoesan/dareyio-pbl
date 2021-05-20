@@ -149,16 +149,76 @@ Now we would go back into the Ansible pipeline in Jenkins and select configure -
 
 Scroll down to `Build Configuration` section and specify the location of the Jenkinsfile (`deploy/Jenkinsfile`).
 
+![image](https://user-images.githubusercontent.com/22638955/118898258-1350c400-b904-11eb-86b6-eb395efce753.png)
+
 Save the above.
 
 Go to the Blue Ocean dashboard, select the `ansible-config-mgt` project
 
-Hover over any of the branches, and oyu should see a play button. Click on it, and it should build it
+Hover over any of the branches, and you should see a play button. Click on it, and it should build it
 
 ![image](https://user-images.githubusercontent.com/22638955/118900302-86f4d000-b908-11eb-8f79-33ae396fa72f.png)
 
+This pipeline is a multibranch one. This means that, if there were more than one branch in GitHub, Jenkins would have scanned the repository to discover them all and we would have been able to trigger a build for each branch.
 
+Let us create another branch to see the multibranching feature in action - 
 
+* Create a new git branch and name it `feature/jenkinspipeline-stages`
 
+```
+git checkout -b feature/jenkinspipeline-stages
+```
 
-![image](https://user-images.githubusercontent.com/22638955/118898258-1350c400-b904-11eb-86b6-eb395efce753.png)
+![image](https://user-images.githubusercontent.com/22638955/118900814-c243ce80-b909-11eb-853e-bfa270f7f881.png)
+
+* Currently we only have the `Build` stage. Let us add another stage called `Test`. Paste the code snippet below and push the new changes to GitHub.
+
+```
+pipeline {
+    agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+
+    stage('Test') {
+      steps {
+        script {
+          sh 'echo "Testing Stage"'
+        }
+      }
+    }
+    }
+}
+```
+
+![image](https://user-images.githubusercontent.com/22638955/118900986-1fd81b00-b90a-11eb-8389-51d3e90157b4.png)
+
+Push these changes to Github - 
+
+```
+git add .
+git commit -m "Commit new stage into Github"
+git push --set-upstream origin feature/jenkinspipeline-stages
+```
+
+To make the new branch show up in Jenkins, we need to tell Jenkins to scan the repository.
+
+* On the Blue Ocean Dashboard, Click on the “Administration” button
+
+![image](https://user-images.githubusercontent.com/22638955/118902333-5b281900-b90d-11eb-99cb-a8e1d22c51fc.png)
+
+* Navigate to the Ansible project and click on “Scan repository now”
+
+![image](https://user-images.githubusercontent.com/22638955/118902457-97f41000-b90d-11eb-8735-471ba1e593b2.png)
+
+* Refresh the page and both branches will start building automatically. You can go into Blue Ocean and see both branches there too.
+
+![image](https://user-images.githubusercontent.com/22638955/118903179-143b2300-b90f-11eb-8d84-1d0385ba7b20.png)
+
+* In Blue Ocean, we can now see how the Jenkinsfile has caused a new step in the pipeline launch build for the new branch.
