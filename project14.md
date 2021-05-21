@@ -222,3 +222,28 @@ To make the new branch show up in Jenkins, we need to tell Jenkins to scan the r
 ![image](https://user-images.githubusercontent.com/22638955/118903179-143b2300-b90f-11eb-8d84-1d0385ba7b20.png)
 
 * In Blue Ocean, we can now see how the Jenkinsfile has caused a new step in the pipeline launch build for the new branch.
+
+![image](https://user-images.githubusercontent.com/22638955/119066380-91ca6600-b9d7-11eb-80ca-f205d470c592.png)
+
+Let us go a step further by doing the following below - 
+* Create a pull request to merge the latest code into the `main branch`
+* After merging the `PR`, go back into the terminal and switch into the `main` branch.
+* Pull the latest change.
+* Create a new branch, add more stages into the Jenkins file to simulate below phases. (Just add an `echo` command like we have in `build` and `test` stages)
+    * Package 
+    * Deploy 
+    * Clean up
+* Verify in Blue Ocean that all the stages are working, then merge the feature branch to the main branch
+* Eventually, the main branch should have a successful pipeline like this in blue ocean
+
+![image](https://user-images.githubusercontent.com/22638955/119069342-e4a71c00-b9dd-11eb-90b1-f4c90029a7dc.png)
+
+## Running Ansible Playbook from Jenkins
+
+
+
+
+
+
+
+
