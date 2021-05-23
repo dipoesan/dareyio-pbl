@@ -240,10 +240,20 @@ Let us go a step further by doing the following below -
 
 ## Running Ansible Playbook from Jenkins
 
+Install Ansible on the Jenkins server
 
+```
+sudo apt install ansible -y
+```
 
+Install the ansible plugin from the Jenkins UI
 
+* Go to the manage Jenkins tab on the Jenkins homepage
+* Click on Manage Plugins
+* Click on the Available tab
+* Go to the search bar and type in Ansible
+* Click the check box next to the plugin
+* Then Install without restart
 
-
-
+![image](https://user-images.githubusercontent.com/22638955/119278471-66d15380-bc1d-11eb-8390-3d904c95a9c3.png)
 
