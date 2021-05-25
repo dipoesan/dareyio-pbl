@@ -257,3 +257,11 @@ Install the ansible plugin from the Jenkins UI
 
 ![image](https://user-images.githubusercontent.com/22638955/119278471-66d15380-bc1d-11eb-8390-3d904c95a9c3.png)
 
+Go to the manage Jenkins tab -> global tool connfiguration
+
+![image](https://user-images.githubusercontent.com/22638955/119279256-6dae9500-bc22-11eb-9d66-45a5e66c63f6.png)
+
+Click on Ansible -> add whatever value into name -> find your ansible executable directory by typing `which ansible`
+
+![image](https://user-images.githubusercontent.com/22638955/119279355-1957e500-bc23-11eb-9e02-ca1dc8228b16.png)
+
