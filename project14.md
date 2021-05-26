@@ -304,4 +304,50 @@ stage('Clean up') {
         }
 ```
 
+Once all of the above have been completed and pushed, we can go and trigger the build and we should get the below -
+
 ![image](https://user-images.githubusercontent.com/22638955/119589521-df294780-bdca-11eb-9a4e-c2de7b1380eb.png)
+
+## Parameterizing Jenkinsfile For Ansible Deployment
+
+To deploy to other environments, we will need to use parameters.
+
+* Update sit inventory with new servers
+```
+[tooling]
+<SIT-Tooling-Web-Server-Private-IP-Address>
+
+[todo]
+<SIT-Todo-Web-Server-Private-IP-Address>
+
+[nginx]
+<SIT-Nginx-Private-IP-Address>
+
+[db:vars]
+ansible_user=ec2-user
+ansible_python_interpreter=/usr/bin/python
+
+[db]
+<SIT-DB-Server-Private-IP-Address>
+```
+
+* Update Jenkinsfile to introduce parameterization. Below is just one parameter. It has a default value in case if no value is specified at execution. It also has a description so that everyone is aware of its purpose.
+```
+pipeline {
+    agent any
+
+    parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+```
+
+* In the Ansible execution section, remove the hardcoded inventory/dev and replace with `${inventory}. With this, each time we click on execute, it would expect an input
+
+![image](https://user-images.githubusercontent.com/22638955/119591588-c9b61c80-bdce-11eb-8eda-ff0bd45a9beb.png)
+
+* Add a tagging parameter 
+```
+string(name: 'tag', defaultValue: 'all',  description: 'Tags to specify which Ansible plays to run')
+```
+
+
