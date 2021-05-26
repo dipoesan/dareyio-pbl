@@ -350,4 +350,7 @@ pipeline {
 string(name: 'tag', defaultValue: 'all',  description: 'Tags to specify which Ansible plays to run')
 ```
 
+## CI/CD Pipeline for TODO application
+
+We would have to update Ansible with an Artifactory role. We can use this [guide](https://www.howtoforge.com/tutorial/ubuntu-jfrog/) to create the role.
 
