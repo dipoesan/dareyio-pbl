@@ -265,3 +265,6 @@ Click on Ansible -> add whatever value into name -> find your ansible executable
 
 ![image](https://user-images.githubusercontent.com/22638955/119279355-1957e500-bc23-11eb-9e02-ca1dc8228b16.png)
 
+
+
+![image](https://user-images.githubusercontent.com/22638955/119589521-df294780-bdca-11eb-9a4e-c2de7b1380eb.png)
