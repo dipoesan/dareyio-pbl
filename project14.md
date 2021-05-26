@@ -265,6 +265,43 @@ Click on Ansible -> add whatever value into name -> find your ansible executable
 
 ![image](https://user-images.githubusercontent.com/22638955/119279355-1957e500-bc23-11eb-9e02-ca1dc8228b16.png)
 
+Create the `jenkinsfile` from the scratch and delete all it's contents
 
+* First we would create a stage that would clone our `ansible-config-mgt` repo
+```
+stages {
+        stage('Clone Repo') {
+          steps {
+            git branch: 'main', url: 'https://github.com/dipoesan/ansible-config-mgt.git'
+          }
+        }
+```
+Decided to clone from the `main` branch because I was having issues cloning from other branches I had created previously
+
+* Next stage is to prepare Ansible for execution
+```
+stage('Prepare Ansible For Execution') {
+          steps {
+            sh 'echo ${WORKSPACE}'
+            }
+        }
+```
+
+* Next stage is to run the Ansible playbook
+```
+stage('Run playbook') {
+          steps {
+            ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory/${params.inventory}', playbook: 'playbooks/site.yml'            }
+        }
+```
+
+* Final stage is the clean up stage (This step is to delete a previous workspace before running a new one. This is because sometimes, changes we push to git do not show up as a result of an old worksapce still being present)
+```
+stage('Clean up') {
+          steps {
+            cleanWs cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true
+          }
+        }
+```
 
 ![image](https://user-images.githubusercontent.com/22638955/119589521-df294780-bdca-11eb-9a4e-c2de7b1380eb.png)
