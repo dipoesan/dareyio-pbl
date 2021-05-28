@@ -380,3 +380,6 @@ The `Artifactory` plugin will be used to easily upload code artifacts into an Ar
 
 * In Jenkins UI configure Artifactory
 
+# BLOCKER 
+Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules
+My instance was inaccessible at some point in time. After reaching out to some colleagues in Darey.io, it was suggested I changed the instance type to a higher one (t2 nano [2GB] to t2 medium [4GB]). I changed it, and the instance was accessible again. What I noticed is that artifactory requires a minimum of 4GB ram to run, and I was using t2 nano which had only 2GB. Saw that after switching to t2 medium, my instance was using about 3GB of RAM. Hence, the system ran out of memory when I installed artifactory.
