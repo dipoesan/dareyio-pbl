@@ -354,3 +354,29 @@ string(name: 'tag', defaultValue: 'all',  description: 'Tags to specify which An
 
 We would have to update Ansible with an Artifactory role. We can use this [guide](https://www.howtoforge.com/tutorial/ubuntu-jfrog/) to create the role.
 
+After successful installation of artifactory, we can check to see the staus of artifactfory as shown below - 
+
+![image](https://user-images.githubusercontent.com/22638955/119910678-8e8f2700-bf4f-11eb-989f-242df8e7e35a.png)
+
+### Phase 1 - Prepare Jenkins
+
+* We would be forking the repository below into our GitHub account
+
+```
+https://github.com/darey-devops/php-todo.git
+```
+
+* On the Jenkins server, install PHP, its dependencies and the Composer tool
+
+```
+sudo apt install -y zip libapache2-mod-php phploc php-{xml,bcmath,bz2,intl,gd,mbstring,mysql,zip}
+```
+
+* Install Jenkins plugins
+    * Plot Plugin
+    * Artifactory Plugin
+We will use `plot` plugin to display tests reports, and code coverage information.
+The `Artifactory` plugin will be used to easily upload code artifacts into an Artifactory server.
+
+* In Jenkins UI configure Artifactory
+
