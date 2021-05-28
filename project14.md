@@ -380,6 +380,24 @@ The `Artifactory` plugin will be used to easily upload code artifacts into an Ar
 
 * In Jenkins UI configure Artifactory
 
+Manage Jenkins -> Configure System -> Scroll down to Jfrog and input values as shown below
+
+![image](https://user-images.githubusercontent.com/22638955/119919149-b4bdc280-bf61-11eb-8811-8e252a313c4d.png)
+
+Please remember to open port 8082 in your EC2 instance.
+
+If everything is configured properly, you should be able to access Jfrog as shown below - 
+
+![image](https://user-images.githubusercontent.com/22638955/119918981-5ee91a80-bf61-11eb-8071-a989796e4a00.png)
+
+### Phase 2 - Integrate Artifactory repository with Jenkins
+
+Create a dummy `Jenkinsfile` in the repository
+
+Create a multibranch Jenkins pipeline within Blue Ocean
+
+On the database server, create a database and a user
+
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
 
