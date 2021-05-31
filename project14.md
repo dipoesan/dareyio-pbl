@@ -494,7 +494,36 @@ We should now see a Plot menu item on the left menu. Click on it to see the char
 
 ![image](https://user-images.githubusercontent.com/22638955/120128431-dadd9f80-c1b9-11eb-82e3-b9705811d9fa.png)
 
+Bundle the application code into an artifact (archived package) to upload to Artifactory
 
+```
+stage ('Package Artifact') {
+    steps {
+            sh 'zip -qr ${WORKSPACE}/php-todo.zip ${WORKSPACE}/*'
+}
+}
+```
+
+Publish the resulted artifact into Artifactory
+
+```
+stage ('Deploy Artifact') {
+    steps {
+            script { 
+                 def server = Artifactory.server 'artifactory-server'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "php-todo.zip",
+                       "target": "php-todo"
+                    }]
+                 }"""
+
+                 server.upload(uploadSpec) 
+               }
+    }
+  
+}
+```
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
 
