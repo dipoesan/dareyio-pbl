@@ -441,7 +441,20 @@ pipeline {
 }
 ```
 
+Update the Jenkinsfile to include Unit tests step
 
+```
+stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      } 
+```
+
+### Phase 3 - Code Quality Analysis
+
+This is one of the areas where developers, architects and many stakeholders are mostly interested in as far as product development is concerned. As a DevOps engineer, we also have a role to play. Especially when it comes to setting up the tools.
+
+For PHP the most commonly tool used for code quality analysis is phploc.
 
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
