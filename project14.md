@@ -524,6 +524,8 @@ stage ('Deploy Artifact') {
   
 }
 ```
+
+njfj
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
 
