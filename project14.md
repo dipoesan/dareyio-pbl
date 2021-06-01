@@ -525,7 +525,32 @@ stage ('Deploy Artifact') {
 }
 ```
 
-njfj
+Deploy the application to the `dev` environment by launching Ansible pipeline
+
+```
+stage ('Deploy to Dev Environment') {
+    steps {
+    build job: 'ansible-project/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+    }
+  }
+```
+
+![image](https://user-images.githubusercontent.com/22638955/120391687-4ee98600-c327-11eb-9ace-c358ff169df0.png)
+
+From the above, we can see that the "deploy artifact" stage is failing. In the error message, it said we can retry after 55 seconds.
+
+![image](https://user-images.githubusercontent.com/22638955/120392471-73922d80-c328-11eb-9ba6-a641635de64a.png)
+
+Restarted the "deploy to artifact" stage and it completed successfully -
+
+## Configure SonarQube
+
+We will make some Linux Kernel configuration changes to ensure optimal performance of the tool - we will increase `vm.max_map_count`, `file discriptor` and `ulimit`.
+
+### Tune Linux Kernel
+
+
+
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
 
