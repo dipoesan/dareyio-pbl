@@ -549,7 +549,160 @@ We will make some Linux Kernel configuration changes to ensure optimal performan
 
 ### Tune Linux Kernel
 
+This can be achieved by making session changes which does not persist beyond the current session terminal.
 
+```
+sudo sysctl -w vm.max_map_count=262144
+sudo sysctl -w fs.file-max=65536
+ulimit -n 65536
+ulimit -u 4096
+```
+
+![image](https://user-images.githubusercontent.com/22638955/120394923-0f716880-c32c-11eb-9a45-c0272fc038d5.png)
+
+To make a permanent change, edit the file `/etc/security/limits.conf` and append the below -
+
+```
+sonarqube   -   nofile   65536
+sonarqube   -   nproc    4096
+```
+
+Before installing, let us update and upgrade system packages:
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+Install wget and unzip packages
+
+```
+sudo apt-get install wget unzip -y
+```
+
+Install OpenJDK and Java Runtime Environment (JRE) 11
+
+```
+sudo apt-get install openjdk-11-jdk -y
+sudo apt-get install openjdk-11-jre -y
+```
+
+Set default JDK - To set default JDK or switch to OpenJDK enter below command:
+
+```
+sudo update-alternatives --config java
+```
+
+If you have multiple versions of Java installed, you should see a list like below:
+
+```
+Selection    Path                                            Priority   Status
+
+------------------------------------------------------------
+
+  0            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      auto mode
+
+  1            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      manual mode
+
+  2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
+
+* 3            /usr/lib/jvm/java-8-oracle/jre/bin/java          1081      manual mode
+```
+
+Type “1” to switch OpenJDK 11
+
+Verify the set JAVA Version:
+
+```
+java -version
+```
+
+### Install and Setup PostgreSQL 10 Database for SonarQube
+
+The command below will add PostgreSQL repo to the repo list:
+
+```
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+```
+
+Download PostgreSQL software
+
+```
+wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+```
+
+Install PostgreSQL Database Server
+
+```
+sudo apt-get -y install postgresql postgresql-contrib
+
+```
+
+Start PostgreSQL Database Server
+
+```
+sudo systemctl start postgresql
+```
+
+Enable it to start automatically at boot time
+
+```
+sudo systemctl enable postgresql
+```
+
+Change the password for default postgres user
+
+```
+sudo passwd postgres
+```
+
+Switch to the postgres user
+
+```
+su - postgres
+```
+
+Create a new user by typing the below -
+
+```
+createuser sonar
+```
+
+Switch to the PostgreSQL shell
+
+```
+psql
+```
+
+Set a password for the newly created user for SonarQube database
+
+```
+ALTER USER sonar WITH ENCRYPTED password 'sonar';
+```
+
+Create a new database for PostgreSQL database by running:
+
+```
+CREATE DATABASE sonarqube OWNER sonar;
+```
+
+Grant all privileges to sonar user on sonarqube Database
+
+```
+grant all privileges on DATABASE sonarqube to sonar;
+```
+
+Exit from the psql shell:
+
+```
+\q
+```
+
+Switch back to the `sudo` user by running the exit command.
+
+```
+exit
+```
 
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
