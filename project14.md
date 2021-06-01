@@ -704,6 +704,97 @@ Switch back to the `sudo` user by running the exit command.
 exit
 ```
 
+### Install SonarQube on Ubuntu 20.04 LTS
+
+Navigate to the tmp directory to temporarily download the installation files
+
+```
+cd /tmp && sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.3.zip
+```
+
+Unzip the archive setup to `/opt directory`
+
+```
+sudo unzip sonarqube-7.9.3.zip -d /opt
+```
+
+Move extracted setup to /opt/sonarqube directory
+
+```
+sudo mv /opt/sonarqube-7.9.3 /opt/sonarqube
+```
+
+## Configure SonarQube
+
+We cannot run SonarQube as a root user, if you run using root user it will stop automatically. The ideal approach will be to create a separate group and a user to run SonarQube
+
+Create a group `sonar`
+
+```
+sudo groupadd sonar
+```
+
+Now add a user with control over the `/opt/sonarqube` directory
+
+```
+sudo useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
+sudo chown sonar:sonar /opt/sonarqube -R
+```
+
+Open SonarQube configuration file using your favourite text editor (e.g., nano or vim)
+
+```
+sudo vi /opt/sonarqube/conf/sonar.properties
+```
+
+Find the following lines:
+
+```
+#sonar.jdbc.username=
+#sonar.jdbc.password=
+```
+
+Uncomment them and provide the values of PostgreSQL Database username and password:
+
+```
+sonar.jdbc.username=sonar
+sonar.jdbc.password=sonar
+sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+```
+
+![image](https://user-images.githubusercontent.com/22638955/120400930-ca066880-c336-11eb-850a-8f6185852aa4.png)
+
+Edit the sonar script file and set RUN_AS_USER
+
+```
+sudo vi /opt/sonarqube/bin/linux-x86-64/sonar.sh
+```
+
+![image](https://user-images.githubusercontent.com/22638955/120401391-c45d5280-c337-11eb-90bf-225176f8a25e.png)
+
+Now, to start SonarQube we need to do following:
+
+Switch to sonar user
+
+```
+sudo su sonar
+```
+
+Move to the script directory
+
+```
+cd /opt/sonarqube/bin/linux-x86-64/
+```
+
+Run the script to start SonarQube
+
+```
+./sonar.sh start
+```
+
+
+
+
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
 
