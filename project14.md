@@ -862,6 +862,8 @@ sudo systemctl status sonar
 
 To access SonarQube using browser, type server’s IP address followed by port `9000`
 
+vvv
+
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
 
