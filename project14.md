@@ -792,10 +792,79 @@ Run the script to start SonarQube
 ./sonar.sh start
 ```
 
+Check SonarQube running status:
 
+![image](https://user-images.githubusercontent.com/22638955/120404428-405a9900-c33e-11eb-863f-cb32eb2d525e.png)
 
+To check SonarQube logs, navigate to `/opt/sonarqube/logs/sonar.log` directory
+
+```
+tail /opt/sonarqube/logs/sonar.log
+```
+
+### Configure SonarQube to run as a systemd service
+
+Stop the currently running SonarQube service
+
+```
+ cd /opt/sonarqube/bin/linux-x86-64/
+```
+
+Run the script to stop SonarQube
+
+```
+./sonar.sh stop
+```
+
+Create a systemd service file for SonarQube to run as System Startup.
+
+```
+ sudo vi /etc/systemd/system/sonar.service
+```
+
+Add the configuration below for systemd to determine how to start, stop, check status, or restart the SonarQube service.
+
+```
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+
+User=sonar
+Group=sonar
+Restart=always
+
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target
+```
+
+![image](https://user-images.githubusercontent.com/22638955/120405802-528a0680-c341-11eb-9a15-7566e2ee1974.png)
+
+Save the file and control the service with `systemctl`
+
+```
+sudo systemctl start sonar
+sudo systemctl enable sonar
+sudo systemctl status sonar
+```
+
+![image](https://user-images.githubusercontent.com/22638955/120405923-9715a200-c341-11eb-83cb-2bae285cc3b1.png)
+
+### Access SonarQube
+
+To access SonarQube using browser, type server’s IP address followed by port `9000`
 
 # BLOCKER 
 Could not test or access JFrog after setting it up because I had not enabled the port 8082 in my inbound rules.
 
 My instance was inaccessible at some point in time. After reaching out to some colleagues in Darey.io, it was suggested I change the instance type to a higher one (t2 nano [2GB] to t2 medium [4GB]). I changed it, and the instance was accessible again. What I noticed is that artifactory requires a minimum of 4GB ram to run, and I was using t2 nano which had only 2GB. Saw that after switching to t2 medium, my instance was using about 3GB of RAM. Hence, the system ran out of memory when I installed artifactory.
+
+https://michalwegrzyn.wordpress.com/2016/07/14/do-not-run-sonar-as-root/
