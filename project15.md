@@ -109,6 +109,26 @@ systemctl enable chronyd
   * Set scale out if CPU utilization reaches 90%
   * Ensure there is an SNS topic to send scaling notifications
 
+#### WEBSERVERS
+Create 2 separate launch templates for WordPress and Tooling websites
+* Create an EC2 Instance each for WordPress and Tooling websites per Availability Zone (in the same Region).
+* Ensure that it has the following software installed - python, ntp, net-tools, vim, wget, telnet, epel-release, htop (You can run the same commands as above).
+* Create an AMI out of the EC2 instance
+* Make use of the AMI to set up a launch template
+* Ensure the Instances are launched into a public subnet
+* Assign appropriate security group
+* Configure Userdata to update `yum` package repository and install `wordpress` (Only required on the WordPress launch template)
+
+
+### TLS Certificates From Amazon Certificate Manager (ACM)
+We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB).
+* Navigate to AWS ACM
+* Request a public wildcard certificate for the domain name you registered in Freenom
+* Use DNS to validate the domain name
+* Tag the resource
+
+
+
 
 
 
