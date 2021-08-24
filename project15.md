@@ -119,6 +119,9 @@ Create 2 separate launch templates for WordPress and Tooling websites
 * Assign appropriate security group
 * Configure Userdata to update `yum` package repository and install `wordpress` (Only required on the WordPress launch template)
 
+![image](https://user-images.githubusercontent.com/22638955/130657514-237a2369-0d38-4a3b-883a-cb4e3ffdbb97.png)
+![image](https://user-images.githubusercontent.com/22638955/130657622-64bade72-7fa9-4c1b-b92e-7a1a6afaf464.png)
+
 
 ### TLS Certificates From Amazon Certificate Manager (ACM)
 We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB).
