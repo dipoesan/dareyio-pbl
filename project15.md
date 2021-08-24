@@ -129,7 +129,7 @@ We will need TLS certificates to handle secured connectivity to our Application 
 * Request a public wildcard certificate for the domain name you registered in Freenom
 * Use DNS to validate the domain name
 * Tag the resource
-
+![image](https://user-images.githubusercontent.com/22638955/130660117-28642f39-de0f-4aae-801e-8ca437e1198d.png)
 
 ### CONFIGURE APPLICATION LOAD BALANCER (ALB)
 
@@ -157,12 +157,14 @@ To solve this problem, we must use a load balancer. But this time, it will be an
 * Ensure that health check passes for the target group
 
 **NOTE**: This process must be repeated for both WordPress and Tooling websites.
+![image](https://user-images.githubusercontent.com/22638955/130660040-5634a0e6-aedb-4af6-859e-e1ceee86b853.png)
 
 ### Setup EFS
 * Create an EFS filesystem
 * Create an EFS mount target per AZ in the VPC, associate it with both subnets dedicated for data layer
 * Associate the Security groups created earlier for data layer.
 * Create an EFS access point. (Give it a name and leave all other settings as default)
+![image](https://user-images.githubusercontent.com/22638955/130659909-775c8a97-1e17-4332-a779-423e58965fd3.png)
 
 ### Setup RDS
 **Pre-requisite**: Create a KMS key from Key Management Service (KMS) to be used to encrypt the database instance.
