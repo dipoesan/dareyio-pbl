@@ -197,3 +197,5 @@ Create other records such as CNAME, alias and A records.
 
 
 ![image](https://user-images.githubusercontent.com/22638955/130638151-159d7553-8efb-4904-b72e-edaf4b807a74.png)
+ 
+ ![image](https://user-images.githubusercontent.com/22638955/130660503-2a9fcb7d-f5d9-4ed1-93b7-3d68d67a6422.png)
