@@ -40,8 +40,29 @@ The above diagram is what we want our infrastructure to look like. We are now go
 ![image](https://user-images.githubusercontent.com/22638955/130647331-b4ca0d65-896b-4fdf-aba0-83b8000b2fc5.png)
 
 * Create a Security Group for:
-  * 
+  * Nginx Servers: Access to Nginx should only be allowed from a Application Load balancer (ALB). At this point, we have not created a load balancer, therefore we will update the rules later. For now, just create it and put some dummy records as a place holder.
+  * Bastion Servers: Access to the Bastion servers should be allowed only from workstations that need to SSH into the bastion servers. Hence, you can use your workstation public IP address. To get this information, simply go to your terminal and type curl www.canhazip.com
+  * Application Load Balancer: ALB will be available from the Internet
+  * Webservers: Access to Webservers should only be allowed from the Nginx servers. Since we do not have the servers created yet, just put some dummy records as a place holder, we will update it later.
+  * Data Layer: Access to the Data layer, which is comprised of Amazon Relational Database Service (RDS) and Amazon Elastic File System (EFS) must be carefully desinged – only webservers should be able to connect to RDS, while Nginx and Webservers will have access to EFS Mountpoint.
 
+
+### SET UP COMPUTE RESOURCES
+
+* Create an EC2 Instance based on the RHEL Amazon Machine Image (AMI) in any 2 Availability Zones (AZ) in any AWS Region (it is recommended to use the Region that is closest to your customers). Use EC2 instance of T2 family (e.g. t2.micro or similar)
+* Ensure that it has the following software installed - python, ntp, net-tools, vim, wget, telnet, epel-release, htop.
+```
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
+yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm 
+yum install wget vim python3 telnet htop git mysql net-tools chrony -y 
+systemctl start chronyd
+systemctl enable chronyd
+```
+* Create an AMI out of the EC2 instance
+* Make use of the AMI to set up a launch template
+* Ensure the Instances are launched into a public subnet
+* Assign appropriate security group
+* Configure Userdata to update yum package repository and install nginx
 
 
 
